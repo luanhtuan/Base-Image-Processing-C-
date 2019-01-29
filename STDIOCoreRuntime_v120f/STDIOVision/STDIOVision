@@ -1,1 +1,347 @@
 ###STDIOVision
+#include "STDIOCoreRuntime.h"
+
+void STDIOVisionMinMaxRange(double* min, double* max, double* init)
+{
+	*min = 0.0;
+	*max = 100.0;
+	*init = 2.0;
+}
+
+void STDIOVisionProcess(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+	//printf("%d\n, %d\n, %d\n, %d\n, %d\n", width, height, byte_per_pixel, data, value);
+
+    //GrayscaleImage(width, height, byte_per_pixel, data, value);
+
+	//IncreaseBrightnessOfImage(width, height, byte_per_pixel, data, value);
+	
+	//BoundingBoxImage(width, height, byte_per_pixel, data, value);
+
+	//DecreaseOpacityOfHalfImage(width, height, byte_per_pixel, data, value);
+
+	//SplitingAndSortingImage(width, height, byte_per_pixel, data, value);
+
+	//BlendingAreasOfImage(width, height, byte_per_pixel, data, value);
+
+	ReplaceAnAreaOfImage(width, height, byte_per_pixel, data, value);
+
+	//IncreaseContrastOfImage(width, height, byte_per_pixel, data, value);
+
+
+	/*int resolotion = width * height;
+
+	for (int index = 0; index < resolotion; index++)
+	{
+		int i = index * byte_per_pixel;
+
+		//*(data + i + 0) = 0;
+		*(data + i + 2) = 0;
+		*(data + i + 1) = 0;
+
+
+	}*/
+
+
+}
+
+/*void GrayscaleImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+
+
+	int Gray = 0;
+	int resolotuion = width * height;
+
+	for (int index = 0; index < resolotuion; index++)
+	{
+
+		int i = index * byte_per_pixel;
+
+
+		int Gray = (*(data + i + 0) + *(data + i + 1) + *(data + i + 2)) / 3;
+
+
+		*(data + i + 0) = Gray;
+		*(data + i + 1) = Gray;
+		*(data + i + 2) = Gray;
+		
+
+	}
+
+
+
+}*/
+
+/*void IncreaseBrightnessOfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+
+	
+	int res = width * height;
+	int brightness = 0;
+	
+	for (int index = 0; index < res; index++)
+	{
+
+		int i = index * byte_per_pixel;
+
+		brightness = *(data + i + 0) * value;
+		*(data + i + 0) = brightness > 255 ? 255 : brightness;
+
+		brightness = *(data + i + 1) * value;
+		*(data + i + 1) = brightness > 255 ? 255 : brightness;
+
+		brightness = *(data + i + 2) * value;
+		*(data + i + 2) = brightness > 255 ? 255 : brightness;
+	}
+
+
+}*/
+
+
+
+
+void IncreaseContrastOfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+
+}
+
+
+void BoundingBoxImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+
+}
+
+/*void DecreaseOpacityOfHalfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+
+	if (byte_per_pixel == 4)
+	{
+		int index = 0;
+
+		for (int r = 0; r < height; r++)
+		{
+			for (int c = width / 2; c < width; c++)
+			{
+
+				index = (r * width + c) * byte_per_pixel;
+				*(data + index + 3) *= value;
+
+			}
+		}
+
+
+	}
+
+}*/
+
+/*void SplitingAndSortingImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+	int index[4] = { 0 };
+	byte component = 0;
+
+	int halfWidth = width / 2;
+	int halfHeight = height / 2;
+
+	for (int r = 0; r < halfHeight; r++)
+	{
+		for (int c = 0; c < halfWidth; c++)
+		{
+			index[0] = (r * width + c) * byte_per_pixel;
+			index[1] = ((r + height / 2) * width + c) * byte_per_pixel;
+			index[2] = ((r + height / 2) * width + c + width / 2) * byte_per_pixel;
+			index[3] = (r * width + c + width / 2) * byte_per_pixel;
+
+			for (int i = 0; i < byte_per_pixel; i++)
+			{
+				component = *(data + index[0] + i);
+				*(data + index[0] + i) = *(data + index[1] + i);
+				*(data + index[1] + i) = *(data + index[2] + i);
+				*(data + index[2] + i) = *(data + index[3] + i);
+				*(data + index[3] + i) = component;
+			}
+		}
+	}
+}*/
+
+/*void BlendingAreasOfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+	int X = 0, Y = 1, W = 2, H = 3;
+	int M[4] = { 100, 100, 150, 200 };
+
+	if (M[X] < 0)
+		M[X] = 0;
+	if (M[X] + M[W] > width)
+		M[W] = width - M[X];
+	if (M[Y] < 0)
+		M[Y] = 0;
+	if (M[Y] + M[H] > height)
+		M[H] = height - M[Y];
+
+	byte * layer = new byte[width * height * 4];
+
+	int i;
+	int r;
+	int c;
+
+	int iData;
+	int iLayer;
+	int alpha;
+
+	for (int index = 0; index < width * height; index++)
+	{
+		i = index * 4;
+
+		r = index / width;
+		c = index % width;
+
+		*(layer + i + 0) = 0;
+		*(layer + i + 1) = 0;
+		*(layer + i + 2) = 255;
+
+		if (c < M[X] ||
+			c > M[X] + M[W] ||
+			r < M[Y] ||
+			r > M[Y] + M[H])
+			*(layer + i + 3) = (int)value;
+		else
+			*(layer + i + 3) = 0;
+	}
+
+	for (int index = 0; index < width * height; index++)
+	{
+		iData = index * byte_per_pixel;
+		iLayer = index * 4;
+
+		alpha = layer[iLayer + 3];
+
+		data[iData + 0] = (data[iData + 0] * (255 - alpha) + layer[iLayer + 0] * alpha) / 255;
+		data[iData + 1] = (data[iData + 1] * (255 - alpha) + layer[iLayer + 1] * alpha) / 255;
+		data[iData + 2] = (data[iData + 2] * (255 - alpha) + layer[iLayer + 2] * alpha) / 255;
+	}
+
+	delete layer;
+}*/
+
+void ReplaceAnAreaOfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+	int X = 0, Y = 1, W = 2, H = 3;
+	int rect[4] = { 100, 100, 100, 150 };
+
+	if (rect[X] < 0)
+		rect[X] = 0;
+	if (rect[X] + rect[W] > width)
+		rect[W] = width - rect[X];
+	if (rect[Y] < 0)
+		rect[Y] = 0;
+	if (rect[Y] + rect[H] > height)
+		rect[H] = height - rect[Y];
+
+	int dataIndex = 0;
+	int tempIndex = 0;
+
+	byte* imgTemp = new byte[rect[W] * rect[H] * byte_per_pixel];
+
+	for (int r = 0; r < rect[H]; r++)
+	{
+		for (int c = 0; c < rect[W]; c++)
+		{
+			tempIndex = (r * rect[W] + c) * byte_per_pixel;
+			dataIndex = ((r + rect[Y]) * width + c + rect[X]) * byte_per_pixel;
+
+			*(imgTemp + tempIndex + 0) = *(data + dataIndex + 0);
+			*(imgTemp + tempIndex + 1) = *(data + dataIndex + 1);
+			*(imgTemp + tempIndex + 2) = *(data + dataIndex + 2);
+			if (byte_per_pixel == 4)
+				*(imgTemp + tempIndex + 3) = *(data + dataIndex + 3);
+		}
+	}
+
+	for (int r = 0; r < rect[H]; r++)
+	{
+		for (int c = 0; c < rect[W]; c++)
+		{
+			tempIndex = (r * rect[W] + c) * byte_per_pixel;
+			dataIndex = ((r + rect[Y]) * width + c + rect[X]) * byte_per_pixel;
+
+			*(data + dataIndex + 0) = *(imgTemp + tempIndex + 0);
+			*(data + dataIndex + 1) = *(imgTemp + tempIndex + 1);
+			*(data + dataIndex + 2) = *(imgTemp + tempIndex + 2);
+			if (byte_per_pixel == 4)
+				*(data + dataIndex + 3) = *(imgTemp + tempIndex + 3);
+		}
+	}
+
+	delete[] imgTemp;
+}
+
+void FlipAnAreaOfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void ZoomOutAnAreaOfImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void ZoomInAndBlendingImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void InvertImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void CompressImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void DecompressImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void SimpleEncryptImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void BlurImage(int width, int height, int byte_per_pixel, byte* &data, double value)
+{
+}
+
+void MotionBlurImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void BloomImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void CCBlurImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void CCBloomImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void EdgeImage(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void MakeHalfImageTransparent(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void FlipAnImageHorizontal(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void FlipAnImageVertical(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void CompressImageTo16bit(int width, int height, int byte_per_pixel, byte*& data, double value)
+{
+}
+
+void SoftlightImage(int width, int height, int byte_per_pixel, byte *& data, double value)
+{
+}
