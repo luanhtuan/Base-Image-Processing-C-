@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Vision">
+      <UniqueIdentifier>{026469cf-b98b-43e9-922a-6e8f037fac23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Calculator">
+      <UniqueIdentifier>{29acbad0-fa0b-4ea5-b7f9-375de5684bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="System">
+      <UniqueIdentifier>{043638b3-d34a-4ee4-9b1f-01e6bc7a2064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pencil">
+      <UniqueIdentifier>{2235daf4-55c2-4bf1-8549-1c6f36e869b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dots">
+      <UniqueIdentifier>{25e5d0ce-c443-4a1b-aec4-6515f247e941}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="STDIOCalculator\STDIOCalculator.cpp">
+      <Filter>Calculator</Filter>
+    </ClCompile>
+    <ClCompile Include="STDIOPencil\STDIOPencil.cpp">
+      <Filter>Pencil</Filter>
+    </ClCompile>
+    <ClCompile Include="STDIOVision\STDIOVision.cpp">
+      <Filter>Vision</Filter>
+    </ClCompile>
+    <ClCompile Include="STDIODots\STDIODots.cpp">
+      <Filter>Dots</Filter>
+    </ClCompile>
+    <ClCompile Include="STDIODots\STDIODots.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="STDIOCalculator\STDIOCalculator.h">
+      <Filter>Calculator</Filter>
+    </ClInclude>
+    <ClInclude Include="System\Structure.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="STDIOPencil\STDIOPencil.h">
+      <Filter>Pencil</Filter>
+    </ClInclude>
+    <ClInclude Include="STDIOVision\STDIOVision.h">
+      <Filter>Vision</Filter>
+    </ClInclude>
+    <ClInclude Include="System\STDIOVisionBridge.h">
+      <Filter>System</Filter>
+    </ClInclude>
+    <ClInclude Include="STDIODots\STDIODots.h">
+      <Filter>Dots</Filter>
+    </ClInclude>
+    <ClInclude Include="STDIODots\STDIODots.h" />
+    <ClInclude Include="STDIOCoreRuntime.h" />
+  </ItemGroup>
+</Project>
