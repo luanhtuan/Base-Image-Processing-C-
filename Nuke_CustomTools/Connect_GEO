@@ -1,0 +1,26 @@
+import nuke
+
+def connectGeo():
+
+    GeoNames = ' '.join([i.name() for i in nuke.allNodes("ReadGeo2")])
+    if GeoNames:
+       panel = nuke.Panel("ConnectGeo", 400)
+       panel.addEnumerationPulldown("SelecGeo", GeoNames)
+       panel.addButton("cancel")
+       panel.addButton("connect")
+       result = panel.show()
+       selGeo =  panel.value("SelecGeo")
+
+       if result == 0:
+          return
+
+       else:
+          dot = nuke.createNode("Dot", inpanel=False)
+          dot.setInput(0, nuke.toNode(selGeo))
+          dot["label"].setValue("  \n\n"+selGeo)
+          dot["note_font"].setValue("Bitstream Vera Sane Bold")
+          dot["note_font_size"].setValue(20)
+          dot["hide_input"].setValue(True)
+          
+    else:
+       nuke.message('<center>No Camera Found\n please import some camera connect')
