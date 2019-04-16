@@ -1,0 +1,272 @@
+# Create a list call range nodes
+'''lis = []
+for bl in range(7):
+    bl = nuke.createNode("Blur", inpanel = False)
+    n = bl['name'].value()
+    lis.append(n)
+print lis'''
+
+###############################################################
+
+# Create a range Shuffle nodes:
+
+sn = nuke.selectedNode()
+for s in range(7):
+  s = nuke.createNode("Shuffle", inpanel = False)
+  s['in'].value()
+  s.connectInput(0, sn)
+
+
+###############################################################
+
+# create a range nodes
+
+blurlist = []
+gradelist = []
+pan = nuke.getInput('the number of nodes you want?', 'create a range')
+for ex in range (int(pan)):
+  bl = nuke.createNode("Blur", inpanel = False)
+  n = bl['name'].value()
+  blurlist.append(n)
+  gr = nuke.createNode("Grade", inpanel = False)
+  g = gr['name'].value()
+  gradelist.append(g)
+  tf = nuke.createNode("Transform", inpanel = False)['selected'].setValue(False)
+
+print blurlist
+print gradelist
+
+###############################################################
+
+#  create range cards with increasing position over z axis scaling
+
+
+amount = 10
+for s in range(1,amount):
+  a = nuke.nodes.Card()
+  pos = s * 3 * (amount/5)
+  a['translate'].setValue([0,0,pos])
+  a['uniform_scale'].setValue(pos)
+
+# a range cards connect with Scene node
+
+amount = 10
+for s in range(amount):
+    a = nuke.nodes.Card()
+    pos = s * (amount/5)
+    a['translate'].setValue([0,0,pos])
+    a['uniform_scale'].setValue(pos)
+    a['selected'].setValue(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+
+amount = 10
+for s in range(amount):
+    a = nuke.nodes.Card()
+    pos = float(float(s) * float(amount/5))
+    a['translate'].setValue([0,0,pos])
+    a['uniform_scale'].setValue(pos)
+    a['selected'].setValue(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+   b.setInput(x,i)
+
+###############################################################
+# create 15 degrees - increasing card  rotate:
+
+amount = 30
+for s in range(1,amount):
+    a = nuke.nodes.Card()
+    pos = s * (amount/5)
+    rot = s *amount/2
+    a['translate'].setValue([0,0,pos])
+    a['uniform_scale'].setValue(pos)
+    a['rotate'].setValue([0,0,rot])
+    a['selected'].setValue(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+   b.setInput(x,i)
+
+#################
+
+amount = int(float(nuke.getInput("Number of cards", "type a number here")))
+for s in range(amount):
+    a = nuke.nodes.Card()
+    pos = s * (amount/5)
+    rot = s * (amount/5)
+    a['translate'].setValue([0,0,pos])
+    a['uniform_scale'].setValue(pos)
+    a['rotate'].setValue([0,0,rot])
+    a['selected'].setValue(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+
+###############################################################
+#Create Sphere particle
+
+## style 1:
+
+import random
+amount = int(nuke.getInput("how many objects", "type value"))
+for i in range(amount):
+    a = nuke.nodes.Sphere()
+    posx = float(float(i)*float(random.uniform(1,3)))
+    posy = float(random.uniform(2.5,5))
+    a['translate'].setValue([posx,posy,0])
+    a['uniform_scale'].setValue(0.5)
+    a['selected'].setValue(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+
+## style 2:
+
+import random
+nnn = []
+amount = int(nuke.getInput("how many objects", "type value"))
+for i in timeit.timeit('"-".join(map(str, range(amount)))'):
+    a = nuke.nodes.Sphere()
+    posx = float(float(i)*float(random.uniform(1,3)))
+    posy = float(random.uniform(2.5,5))
+    a['translate'].setValue([posx,posy,0])
+    a['uniform_scale'].setValue(0.5)
+    a['selected'].setValue(True)
+    k = nuke.selectedNodes()
+for n in k:
+    nnn.append(n.name())
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+print nnn
+
+###################################################################
+
+# Create Traffic in the street
+
+import random
+txt = nuke.getInput('how many objects', 'type value')
+list = []
+for i in range(int(txt)):
+    a = nuke.nodes.Sphere()
+    posx = float(float(i) * float(random.uniform(1,3)))
+    posy = float(random.uniform(2.5,5))
+    rndNum = float(float(i) * float(random.uniform(2,5)))
+    a['translate'].setValue([posx,posy,0])
+    a['translate'].setExpression('sin((frame+1000)/'+str(rndNum)+')'+'*'+str(rndNum*2),2)
+    a['uniform_scale'].setValue(0.5)
+    a.setSelected(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+
+# Add Timeit - STEP 1
+
+import random
+import  timeit
+
+txt = nuke.getInput('how many objects', 'type value')
+list = []
+for i in range(int(txt)):
+    a = nuke.nodes.Sphere()
+    posx = float(float(i) * float(random.uniform(1,3)))
+    posy = float(random.uniform(2.5,5))
+    rndNum = timeit.timeit('"-".join(str(i) for i in range (100))',
+                   number = 10000)
+    a['translate'].setValue([posx,posy,0])
+    a['translate'].setExpression('sin((frame+1000)/'+str(rndNum)+')'+'*'+str(rndNum*2),2)
+    a['uniform_scale'].setValue(0.5)
+    a.setSelected(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+
+# Add Timeit - STEP 2
+
+
+import random
+import  timeit
+
+txt = nuke.getInput('how many objects', 'type value')
+list = []
+for i in range(int(txt)):
+    a = nuke.nodes.Sphere()
+    posx = float(float(i) * float(random.uniform(1,3)))
+    posy = float(random.uniform(2.5,5))
+    rndNum = timeit.timeit('"-".join([str(i) for i in range (100)])',
+                            number = 10000)
+    a['translate'].setValue([posx,posy,0])
+    a['translate'].setExpression('sin((frame+1000)/'+str(rndNum)+')'+'*'+str(rndNum*2),2)
+    a['uniform_scale'].setValue(0.5)
+    a.setSelected(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i
+
+# Add Timeit - STEP 3
+
+  import random
+  import timeit
+
+  txt = nuke.getInput('how many objects', 'type value')
+  list = []
+  for i in range(int(txt)):
+      a = nuke.nodes.Sphere()
+  posx = float(float(i) * float(random.uniform(1, 3)))
+  posy = float(random.uniform(2.5, 5))
+  rndNum = timeit.timeit('"-".join(map(str, range(100)))',
+                         number=10000)
+  a['translate'].setValue([posx, posy, 0])
+  a['translate'].setExpression('sin((frame+1000)/' + str(rndNum) + ')' + '*' + str(rndNum * 2), 2)
+  a['uniform_scale'].setValue(0.5)
+  a.setSelected(True)
+  k = nuke.selectedNodes()
+  b = nuke.createNode("Scene")
+  x = 0
+  for i in k:
+      b.setInput(x, i)
+
+
+### Style 2
+
+import random
+txt = nuke.getInput('how many objects', 'type value')
+list = []
+for i in range(int(txt)):
+    a = nuke.nodes.Sphere()
+    posx = float(float(i) * float(random.uniform(1,3)))
+    posy = float(random.uniform(2.5,5))
+    rndNum = float(float(i) * float(random.uniform(2,5)))
+    a['translate'].setValue([posx,posy,0])
+    a['translate'].setExpression('sin((frame+1000)/'+str(rndNum)+')'+'*'+str(rndNum*2),2)
+    a['uniform_scale'].setAnimated(0)
+    a['uniform_scale'].setValueAt(random.random()*i,1)
+    a['uniform_scale'].setValueAt(random.uniform(1,2)*i,50)
+    a['uniform_scale'].setValueAt(random.random()*i,100)
+    a.setSelected(True)
+    k = nuke.selectedNodes()
+b = nuke.createNode("Scene")
+x = 0
+for i in k:
+  b.setInput(x,i)
+
+
+
