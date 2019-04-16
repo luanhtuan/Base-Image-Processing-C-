@@ -1,0 +1,29 @@
+#Duplicate nodes
+n = nuke.selectedNode()
+nukescripts.node_copypaste()
+cam = nuke.selectedNode()
+cam.knob('tile_color').setValue(2829311)
+cam.knob('gl_color').setValue(16777215)
+
+
+
+#Create Projections nodes
+HoldCam = nuke.createNode('FrameHold')
+HoldCam.knob('tile_color').setValue(2829311)
+ProjS = nuke.createNode('Project3D2')
+ProjS.knob('tile_color').setValue(2829311)
+HoldImg = nuke.createNode('FrameHold')
+HoldImg.knob('tile_color').setValue(2829311)
+
+#Nodes Connect
+HoldImg.setInput(0, None)
+HImg = HoldImg
+ProjS.setInput(0, HImg)
+
+#Set current frame
+HImg.knob('first_frame').setValue(nuke.frame())
+HoldCam.knob('first_frame').setExpression(HImg.knob('name').value()+'.knob.first_frame')
+
+#Link Label
+cam.knob('label').setValue('CamProjects from '+n.knob('name').value())
+HoldCam.knob('label').setValue('reference frame')
