@@ -23,4 +23,4 @@ def connectGeo():
           dot["hide_input"].setValue(True)
           
     else:
-       nuke.message('<center>No Camera Found\n please import some camera connect')
+       nuke.message('<center>No Geometry Found\n please import some geometry connect')
