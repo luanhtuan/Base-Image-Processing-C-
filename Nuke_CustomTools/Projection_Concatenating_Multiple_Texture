@@ -1,0 +1,32 @@
+from __future__ import division
+import math
+FL=nuke.getInput('focal length', 'type your focal length')
+sen_width=nuke.getInput('Sensor Width', 'type your sensor width')
+FOV=2*math.atan(float(sen_width)/(2*int(FL)))*(180/math.pi)
+print math.ceil(FOV) #approximates the result to the returning value
+camList=[]
+projList=[]
+cam_num=math.floor(360/FOV)
+for s in range(int(cam_num)):
+   a= nuke.nodes.Camera()
+   rot= s * float(FOV)
+   a['rotate'].setValue([0,rot,0])
+   a['selected'].setValue(True)
+   a['haperture'].setValue(float(sen_width))
+   a['focal'].setValue(int(FL))
+   k=nuke.selectedNodes()
+   pr=nuke.nodes.Project3D()
+   pr.setInput(1,a)
+   projList.append(pr)
+   nuke.selectAll()
+   nuke.invertSelection()
+   asa=projList[0].setSelected(True)
+   prjNum=len(projList)
+for syt in range(1,prjNum):
+   sr=nuke.createNode('MergeMat', inpanel=False)
+   sr.setInput(0,projList[(syt)])
+   sr.setSelected(True)
+   sph=nuke.createNode('Sphere', inpanel=False)
+   sph['uniform_scale'].setValue(50)
+   sph['display'].setValue(1)
+   nuke.message('I have created '+ str(cam_num) +' cameras' + ' with a rotation factor of ' + str(FOV) + ' degrees')
