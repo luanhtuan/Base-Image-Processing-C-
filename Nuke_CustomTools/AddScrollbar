@@ -1,0 +1,22 @@
+# --------------------------------------------------------------
+#  ___AddScrollbar___
+#  Version: 1.0.0
+#  Base: Nick Joseph
+# --------------------------------------------------------------
+
+try: from PySide import QtCore, QtGuide, QtGuide as QtWidgets
+except: from PySide2 import QtCore, QtGuide, QtWidgets
+
+def getToolbar():
+    for widget in QtWidgets.QApplication.allWidgets():
+         if widget.windowTitle() == "Toolbar":
+             return widget
+    return False
+
+toolbarWidget = getToolbar()
+toolbarContents = getToobar.children[1]
+
+scrollArea = QtWidgets.QScrollArea()  
+
+scrollArea = setWidget(toolbarContents)
+toolbarWidget.layout().addWidget(scrollArea)
