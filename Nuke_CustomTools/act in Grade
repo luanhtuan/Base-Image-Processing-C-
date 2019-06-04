@@ -1,8 +1,0 @@
-### minus gamma in CC and Viewer - act in Grade:
-### Lu Anh Tuan | v001:
-
-
-for g in nuke.allNodes():
-    if not g.Class() == 'ColorCorrect' and not g.Class() == 'Viewer':
-        g['gamma'].setValue(3)
-    
