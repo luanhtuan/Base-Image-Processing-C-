@@ -1,6 +1,0 @@
-for i in nuke.selectedNodes():
-   re = nuke.nodes.Remove()
-   re['operation'].setValue(1)
-   re['channels'].setValue('rgba')
-   x = 0
-   re.setInput(x, i)
