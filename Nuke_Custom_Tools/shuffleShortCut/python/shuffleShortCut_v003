@@ -90,14 +90,14 @@ def shuffleRGBchannels():
 
 	
 # Add menu
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Red to All)", "shuffleShortCut_v002.createCustomShuffle('rgba', 'rgba', 'red', 1, 0, 0)", "ctrl+shift+r", icon="redShuffle.png", shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Green to All)", "shuffleShortCut_v002.createCustomShuffle('rgba', 'rgba', 'green', 0, 1, 0)", "ctrl+shift+g", icon="greenShuffle.png", shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Blue to All)", "shuffleShortCut_v002.createCustomShuffle('rgba', 'rgba', 'blue', 0, 0, 1)", "ctrl+shift+b", icon="blueShuffle.png", shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to All)", "shuffleShortCut_v002.createCustomShuffle('alpha', 'rgba', 'alpha', 1, 1, 1)", "ctrl+shift+a", icon="alphaToAll.png", shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to 0)", "shuffleShortCut_v002.createCustomShuffle('alpha', 'alpha', 'black', 0, 0, 0)", "ctrl+shift+`", icon="alpha0Shuffle.png", shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to 1)", "shuffleShortCut_v002.createCustomShuffle('alpha', 'alpha', 'white', 1, 1, 1)", "ctrl+shift+1", icon="alpha1Shuffle.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Red to All)", "shuffleShortCut_v003.createCustomShuffle('rgba', 'rgba', 'red', 1, 0, 0)", "ctrl+shift+r", icon="redShuffle.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Green to All)", "shuffleShortCut_v003.createCustomShuffle('rgba', 'rgba', 'green', 0, 1, 0)", "ctrl+shift+g", icon="greenShuffle.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Blue to All)", "shuffleShortCut_v003.createCustomShuffle('rgba', 'rgba', 'blue', 0, 0, 1)", "ctrl+shift+b", icon="blueShuffle.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to All)", "shuffleShortCut_v003.createCustomShuffle('alpha', 'rgba', 'alpha', 1, 1, 1)", "ctrl+shift+a", icon="alphaToAll.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to 0)", "shuffleShortCut_v003.createCustomShuffle('alpha', 'alpha', 'black', 0, 0, 0)", "ctrl+shift+`", icon="alpha0Shuffle.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to 1)", "shuffleShortCut_v003.createCustomShuffle('alpha', 'alpha', 'white', 1, 1, 1)", "ctrl+shift+1", icon="alpha1Shuffle.png", shortcutContext=2)
 
 
 
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Split RGB Channels)", "shuffleShortCut_v002.shuffleRGBchannels()", "ctrl+shift+s", icon="ShuffleSplitRGB.png",  shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Merge RGB Channels)", "shuffleShortCut_v002.MergRGBChannel()", "ctrl+shift+s", icon="ShuffleSplitRGB.png", shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Split RGB Channels)", "shuffleShortCut_v003.shuffleRGBchannels()", "ctrl+shift+s", icon="ShuffleSplitRGB.png",  shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Merge RGB Channels)", "shuffleShortCut_v003.MergRGBChannel()", "ctrl+shift+s", icon="ShuffleSplitRGB.png", shortcutContext=2)
