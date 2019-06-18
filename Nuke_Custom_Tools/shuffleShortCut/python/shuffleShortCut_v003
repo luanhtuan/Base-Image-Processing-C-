@@ -78,17 +78,7 @@ def shuffleRGBchannels():
     blueShuffle['ypos'].setValue(selectedNode_yPos+150)
 
 
- 
-
-
-
-    
-
-
-
-    
-
-def MergRGBChannel():
+ def MergRGBChannel():
 
     # Create Merge RGB Channel
 	MergeRGB = nuke.createNode("Merge2", inpanel = False)
@@ -99,13 +89,6 @@ def MergRGBChannel():
 	nuke.selectAll()
 
 	
-    
-    
-
-	
-
-
-
 # Add menu
 nuke.menu("Nodes").addCommand("Channel/Shuffle (Red to All)", "shuffleShortCut_v002.createCustomShuffle('rgba', 'rgba', 'red', 1, 0, 0)", "ctrl+shift+r", icon="redShuffle.png", shortcutContext=2)
 nuke.menu("Nodes").addCommand("Channel/Shuffle (Green to All)", "shuffleShortCut_v002.createCustomShuffle('rgba', 'rgba', 'green', 0, 1, 0)", "ctrl+shift+g", icon="greenShuffle.png", shortcutContext=2)
@@ -117,4 +100,4 @@ nuke.menu("Nodes").addCommand("Channel/Shuffle (Alpha to 1)", "shuffleShortCut_v
 
 
 nuke.menu("Nodes").addCommand("Channel/Shuffle (Split RGB Channels)", "shuffleShortCut_v002.shuffleRGBchannels()", "ctrl+shift+s", icon="ShuffleSplitRGB.png",  shortcutContext=2)
-nuke.menu("Nodes").addCommand("Channel/Shuffle (Merge RGB Channels)", "shuffleShortCut_v002.MergRGBChannel()", "ctrl+shift+s", icon="ShuffleSplitRGB.png",  shortcutContext=2)
+nuke.menu("Nodes").addCommand("Channel/Shuffle (Merge RGB Channels)", "shuffleShortCut_v002.MergRGBChannel()", "ctrl+shift+s", icon="ShuffleSplitRGB.png", shortcutContext=2)
