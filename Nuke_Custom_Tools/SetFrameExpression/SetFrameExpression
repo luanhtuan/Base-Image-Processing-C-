@@ -35,6 +35,8 @@ def Start_Frame():
     for i in nuke.allNodes("Read"):
         i.knob("frame_mode").setValue(1)
         i.knob("frame").setValue(KnobNumber)
+        i.knob("first").setValue(KnobNumber)
+        i.knob("last").setValue(KnobNumber)
     # check if user-input data if number of node to create is actually a number!
     try:
        int(KnobNumber)
