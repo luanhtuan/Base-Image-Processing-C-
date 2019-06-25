@@ -1,5 +1,5 @@
 # --------------------------------------------------------------
-#  SetFrameist.py
+#  SetFrameExpression.py
 #  Version: 1.0.1
 #  Author: Lu Anh Tuan
 #
@@ -44,4 +44,4 @@ def Start_Frame():
 
 utilitiesMenu = nuke.menu('Nuke').addMenu('[LuAnhTuan]')
 
-utilitiesMenu.addCommand('SetReadNode_Frame_Expression', "SetFrameList.Start_Frame()")
+utilitiesMenu.addCommand('SetReadNode_Frame_Expression', "SetFrameExpression.Start_Frame()")
