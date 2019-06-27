@@ -19,7 +19,7 @@ import nuke
 def Start_Frame():
 
     panel = nuke.Panel("Frame__Start")
-    panel.addSingleLineInput("Frame_Name", "")
+    panel.addSingleLineInput("Frame_Name", "frame: start at:")
     panel.addSingleLineInput("Number_Frame", "")
 
     if not panel.show():
@@ -27,11 +27,8 @@ def Start_Frame():
 
     KnobName = panel.value("Frame_Name")
     KnobNumber = panel.value("Number_Frame")
- 
-    if KnobNumber == "":
-        nuke.message("Please enter the number of "+KnobName+" node you would like to create")
-        return
-    
+
+    # callback the knobname from Read  
     for i in nuke.allNodes("Read"):
         i.knob("frame_mode").setValue(1)
         i.knob("frame").setValue(KnobNumber)
