@@ -1,9 +1,0 @@
-void BGR888ToBGR565(unsigned char* color565, const unsigned char* color888)
-{
-
-
-	
-
-
-
-}
