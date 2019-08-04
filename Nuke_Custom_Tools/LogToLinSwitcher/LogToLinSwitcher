@@ -17,21 +17,21 @@ import nuke
 
 def shortcut_LogToLinSwitcher():
 
-	node = nuke.selectedNode()
+    node = nuke.selectedNode()
 
-	LogToLin_ops = {'log2lin': 'lin2log', 'lin2log': 'log2lin'}
+    LogToLin_ops = {'log2lin': 'lin2log', 'lin2log': 'log2lin'}
 
-	if node.Class() == "Log2Lin":
+    if node.Class() == "Log2Lin":
 
-		current_oop = node['operation'].value()
+	current_oop = node['operation'].value()
 
-		if current_oop in LogToLin_ops.keys():
+	if current_oop in LogToLin_ops.keys():
 
-			node['operation'].setValue(LogToLin_ops[node['operation'].value()])
+	    node['operation'].setValue(LogToLin_ops[node['operation'].value()])
 
-		elif current_oop in LogToLin_ops.values():
+	elif current_oop in LogToLin_ops.values():
 		
-		    node['operation'].setValue(LogToLin_ops.keys()[node['operation'].value().index(current_oop)])
+            node['operation'].setValue(LogToLin_ops.keys()[node['operation'].value().index(current_oop)])
 
 
 
