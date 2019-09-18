@@ -1,1 +1,2 @@
 
+import shortcut_LogToLinSwitcher
