@@ -7,8 +7,8 @@ NoOp {
  tile_color 0xff
  label "\[expr \{\[value disable] == true ? \"Node Disable\" :  \"Node Enable\"\}]"
  selected true
- xpos 301
- ypos -58
+ xpos 286
+ ypos 31
  addUserKnob {20 User}
  addUserKnob {26 ""}
  addUserKnob {22 addNodes l "Add Selected Nodes To List" T "# Create List\nnode_list = \[]\n\n# Loop through selected nodes, and add their name to list\nfor i in nuke.selectedNodes():\n    node_list.append(i.name())\n\n# Hide the start knob & show the add more knob \nnuke.thisNode().knob('addMoreNodes').setVisible(True)\nnuke.thisNode().knob('addNodes').setVisible(False)\n\n# Check if thing are working...\nprint node_list\n\n\n# Turn the list into a single string, and add\n# a line break, a bullet point and a space in between each item.\nnode_list_cleaned = '\\n• '.join(node_list)\n\n# Set the value of the text knob\nnuke.thisNode()\['txtknob_nodes_list'].setValue(\"• \"+node_list_cleaned)\n\n\n# Define dunction.\ndef disableNodesInList():\n\n\n    # Loop through all the nodes in node_list.\n    for i in node_list:\n\n        # Check if the node has a disable knob.\n        if nuke.toNode(i).knob('disable'):\n\n            # If it does, set it's disable knob to the va of NODE_DISABLER's disable knob\n            nuke.toNode(i).knob('disable').setValue(nuke.thisNode().knob('disable').value())\n\n        # If the node does NOT have a disable knob, print an error message in the Script Editor.\n        else:\n            print \" - \"+i+\" does not have a 'disable' knob. Ignoring...\"\n\n\n# Add the knobChanged callback to NODE_DISABLER.\nnuke.toNode(\"NODE_DISABLER\").knob(\"knobChanged\").setValue(\"disableNodesInList()\") " +STARTLINE}
@@ -27,5 +27,5 @@ NoOp {
  addUserKnob {26 ""}
  addUserKnob {26 txtknob_nodes_list l "NODE LIST: " T None}
  addUserKnob {26 ""}
+ addUserKnob {26 Create l "" +STARTLINE T "Create by: Lu Anh Tuan\n# Version: 1.0.0\n"}
 }
-
