@@ -1,0 +1,306 @@
+
+set cut_paste_input [stack 0]
+version 10.5 v2
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name Horizol_Lens
+ selected true
+ xpos 2329
+ ypos 515
+ addUserKnob {20 Parameter}
+ addUserKnob {26 ""}
+ addUserKnob {26 Control_Center_Lens}
+ addUserKnob {4 mode M {control_tracking auto_tracking}}
+ mode auto_tracking
+ addUserKnob {41 matrix T Control_Lens.matrix}
+ addUserKnob {41 translate T Control_Lens.translate}
+ addUserKnob {41 rotate T Control_Lens.rotate}
+ addUserKnob {41 scale T Control_Lens.scale}
+ addUserKnob {6 small_horiLens +STARTLINE}
+ small_horiLens true
+ addUserKnob {26 ""}
+ addUserKnob {26 On_Off_Lens}
+ addUserKnob {6 On_Off_Lens_1 l On/Off +STARTLINE}
+ On_Off_Lens_1 true
+ addUserKnob {26 ""}
+}
+ Input {
+  inputs 0
+  name image
+  xpos 501
+  ypos 294
+ }
+ Dot {
+  name Dot2
+  xpos 535
+  ypos 522
+ }
+set N4043ac00 [stack 0]
+push $N4043ac00
+ Transform {
+  rotate -170
+  scale 0.85
+  center {960 540}
+  name Control_Lens
+  xpos 95
+  ypos 518
+ }
+ Switch {
+  inputs 2
+  which {{parent.mode}}
+  name Switch1
+  xpos 95
+  ypos 714
+ }
+set N38c5f80 [stack 0]
+ Blur {
+  size {945 16}
+  crop false
+  name Blur1
+  tile_color 0xff0000ff
+  xpos 281
+  ypos 861
+ }
+ ColorCorrect {
+  shadows.gain {1 0.447198 0.584588 1}
+  shadows.gain_panelDropped true
+  midtones.gain {0.779569 1 0.852341 1}
+  midtones.gain_panelDropped true
+  name ColorCorrect1
+  tile_color 0xff0000ff
+  selected true
+  xpos 281
+  ypos 899
+ }
+set N4043a000 [stack 0]
+ Grade {
+  multiply 5
+  gamma {0.59 0.3332 0.238722 0.59}
+  gamma_panelDropped true
+  name Grade11
+  xpos 95
+  ypos 990
+ }
+set N40481c00 [stack 0]
+ Dot {
+  name Dot3
+  xpos 399
+  ypos 988
+ }
+ Reformat {
+  type "to box"
+  box_width {{input.width}}
+  box_height {{input.height}}
+  box_fixed true
+  name Reformat2
+  tile_color 0xff0000ff
+  xpos 365
+  ypos 1319
+ }
+ Dot {
+  name Dot4
+  xpos 399
+  ypos 1512
+ }
+push $N4043ac00
+push $N40481c00
+ Dot {
+  name Dot5
+  xpos -85
+  ypos 988
+ }
+set N40480800 [stack 0]
+ Transform {
+  translate {-5 0}
+  scale {0.2 0.6}
+  center {960 540}
+  name scale_HorizonFlare4
+  label "scale: \[value scale]"
+  xpos 2
+  ypos 1110
+ }
+push $N40480800
+ Transform {
+  translate {-510 -250}
+  scale {-0.2 -0.3}
+  center {960 540}
+  name scale_HorizonFlare3
+  label "scale: \[value scale]"
+  xpos -96
+  ypos 1099
+ }
+ Saturation {
+  saturation 0
+  name Saturation5
+  xpos -96
+  ypos 1137
+ }
+ Grade {
+  gamma {0.42367 0.795735 1 1}
+  gamma_panelDropped true
+  name Grade12
+  xpos -96
+  ypos 1163
+ }
+push 0
+push $N40480800
+ Transform {
+  translate {-270 -250}
+  scale {-0.3 -0.4}
+  center {960 540}
+  name scale_HorizonFlare2
+  label "scale: \[value scale]"
+  xpos -195
+  ypos 1101
+ }
+ Saturation {
+  saturation 0
+  name Saturation6
+  xpos -195
+  ypos 1139
+ }
+ Grade {
+  gamma {0.42367 0.795735 1 1}
+  gamma_panelDropped true
+  name Grade13
+  xpos -195
+  ypos 1165
+ }
+push $N40480800
+ Transform {
+  translate {270 0}
+  scale {0.3 0.6}
+  center {960 540}
+  name scale_HorizonFlare
+  label "scale: \[value scale]"
+  xpos -313
+  ypos 1110
+ }
+ Blend {
+  inputs 4+1
+  normalize false
+  name Blend1
+  xpos -124
+  ypos 1216
+ }
+ Clamp {
+  name Clamp1
+  xpos -124
+  ypos 1254
+ }
+push $N40481c00
+ Merge2 {
+  inputs 2
+  operation plus
+  name Merge2
+  xpos 95
+  ypos 1260
+  disable {{!small_horiLens}}
+ }
+ Reformat {
+  type "to box"
+  box_width {{input.width}}
+  box_height {{input.height}}
+  box_fixed true
+  name Reformat1
+  tile_color 0xff0000ff
+  xpos 95
+  ypos 1327
+ }
+ Dot {
+  name Dot17
+  xpos 129
+  ypos 1409
+ }
+ Switch {
+  inputs 2
+  which {{!parent.On_Off_Lens_1}}
+  name Switch2
+  xpos 501
+  ypos 1405
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  mix 0.125
+  name Merge1
+  xpos 501
+  ypos 1508
+  disable {{!parent.On_Off_Lens_1 x3 1}}
+ }
+set N404f8c00 [stack 0]
+ Output {
+  name Output1
+  xpos 501
+  ypos 1580
+ }
+ Input {
+  inputs 0
+  name texture
+  xpos -370
+  ypos 365
+  number 1
+ }
+ Radial {
+  area {124.8000031 0.4000015259 131.1999969 255.1999969}
+  name Radial1
+  xpos -370
+  ypos 449
+ }
+ Reformat {
+  format "256 256 0 0 256 256 1 square_256"
+  scale 0.52
+  resize none
+  turn true
+  filter Lanczos6
+  name Reformat4
+  xpos -370
+  ypos 475
+ }
+ Grade {
+  gamma {1 0.485015 0.565775 1}
+  gamma_panelDropped true
+  name Grade10
+  xpos -370
+  ypos 513
+ }
+ Blur {
+  size {5 5}
+  name Blur6
+  xpos -370
+  ypos 539
+ }
+ Transform {
+  scale {10 4.039999962}
+  center {128 128}
+  name Transform20
+  xpos -370
+  ypos 595
+ }
+ Dot {
+  name Dot1
+  xpos -336
+  ypos 907
+ }
+push $N38c5f80
+ Convolve2 {
+  inputs 2
+  channels rgba
+  use_input_channels true
+  name Convolve4
+  xpos 95
+  ypos 903
+ }
+push $N4043a000
+push $N404f8c00
+ Viewer {
+  inputs 2
+  frame_range 1-100
+  fps 25
+  name Viewer1
+  xpos 35
+  ypos 1779
+ }
+end_group
