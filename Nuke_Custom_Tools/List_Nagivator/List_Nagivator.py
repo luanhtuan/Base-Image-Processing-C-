@@ -11,5 +11,7 @@ def list_Nagivator():
         print"• " +i
 
     nuke.message("There are "+str(len(node_list))+" in the list.\n\nThe first node in the list"+node_list[0]+"\nThe last node in the list"+node_list[-1]+" ")
+    
+nuke.menu('Nuke').addCommand('Viewer/View_ListName', 'listNavigator.listNavigator()', 'ctrl+shift+f')		    	 
 
 list_Nagivator()
